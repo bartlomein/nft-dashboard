@@ -44,6 +44,7 @@ This is a full stack application for showing NFTs from the OpenSea plaform and b
 
 - The application will load the top 12 collections from OpenSea on the main page `http://localhost:8080/`
 - A user can click on one of these collections to see the the NFTs inside of that collection
+- A user can also navigate to `/collection/<COLLECTION_NAME>`
 - A user can click the "Add to cart" button to add it to the shopping cart
 - Top right a shopping cart will appear with the names of the items in the cart and the button to add the NFT to cart will be disabled
 - A user can click on the name of the NFT in the shopping cart to remove it from the cart and re-enable the button.
