@@ -33,7 +33,7 @@ const DashboardItem = ({
             <CardTitle>{name}</CardTitle>
             <CardDescription>Card Description</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="flex justify-center">
             <div
               className="flex cursor-pointer rounded-md"
               style={{

@@ -89,12 +89,11 @@ const NFTCard = ({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{identifier}</CardTitle>
-        <CardDescription>Card Description</CardDescription>
+        <CardTitle className="truncate">{identifier}</CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex justify-center">
         <div
-          className="flex cursor-pointer rounded-md"
+          className="flex cursor-pointer rounded-md justify-center align-center"
           style={{
             position: "relative",
             height: height,
@@ -111,7 +110,7 @@ const NFTCard = ({
           />
         </div>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex align-center justify-center">
         <Button onClick={() => addToCart()} disabled={disabled}>
           Add to cart
         </Button>

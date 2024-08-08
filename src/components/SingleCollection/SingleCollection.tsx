@@ -38,13 +38,13 @@ const SingleCollection = ({ slug }: SingleCollectionP) => {
   const [cartId, setCartId] = useLocalStorage<null | number>(CART_ID, null);
 
   if (error) {
-    return <div>ERROR</div>;
+    return (
+      <div className="text-xl text-red">ERROR {JSON.stringify(error)}</div>
+    );
   }
   if (isLoading) {
-    <div>LOADING</div>;
+    return <div className="text-white text-xl">LOADING</div>;
   }
-
-  console.log("data", data);
 
   return (
     <div className="grid grid-cols-4 gap-4 p-4">

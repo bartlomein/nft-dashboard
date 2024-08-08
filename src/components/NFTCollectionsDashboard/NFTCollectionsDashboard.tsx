@@ -31,10 +31,12 @@ const NFTCollectionsDashboard = ({ limit }: NFTDashboardT) => {
   });
 
   if (error) {
-    return <div>ERROR</div>;
+    return (
+      <div className="text-xl text-red">ERROR {JSON.stringify(error)}</div>
+    );
   }
   if (isLoading) {
-    return <div>LOADING</div>;
+    return <div className="text-white text-xl">LOADING</div>;
   }
 
   return (
