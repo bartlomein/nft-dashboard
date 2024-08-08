@@ -79,7 +79,7 @@ const NFTCard = ({
     }
 
     addItem.mutate(cartId);
-  }, [cartId]);
+  }, [cartId, addItem, createCart]);
 
   const disabled = useMemo(
     () => isInCart(contract, identifier, cart),

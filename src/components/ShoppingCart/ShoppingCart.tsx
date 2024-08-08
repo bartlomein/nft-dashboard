@@ -30,7 +30,7 @@ const ShoppingCart = () => {
         items: data.getCart.items,
       });
     }
-  }, [data]);
+  }, [data, localStorageId]);
 
   const removeItem = useMutation<RemoveFromCartT, unknown, number>({
     mutationFn: async (identifier) =>
@@ -58,8 +58,8 @@ const ShoppingCart = () => {
         </CardDescription>
         <CardContent>
           {cart.items &&
-            cart.items.map((cartItem) => (
-              <div>
+            cart.items.map((cartItem, index) => (
+              <div key={index}>
                 <div
                   className="truncate"
                   onClick={() => removeItem.mutate(cartItem.identifier as any)}
