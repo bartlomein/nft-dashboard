@@ -1,0 +1,25 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type CartItem {
+  id: Int!
+  contract: String!
+  identifier: String!
+}
+
+type Cart {
+  id: Int!
+  items: [CartItem!]!
+}
+
+type Query {
+  getCart(cartId: Int!): Cart!
+}
+
+type Mutation {
+  createCart: Cart!
+  addItemToCart(cartId: Int!, contract: String!, identifier: String!): Cart!
+  removeItemFromCart(cartId: Int!, identifier: String!): Cart!
+  deleteCart(id: Int!): Boolean!
+}
