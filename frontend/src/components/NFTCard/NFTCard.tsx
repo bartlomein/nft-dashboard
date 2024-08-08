@@ -105,7 +105,7 @@ const NFTCard = ({
             src={image_url}
             sizes={`${width}px`}
             fill
-            alt={identifier}
+            alt={identifier?.[1]}
             style={{ objectFit: "cover" }}
           />
         </div>
