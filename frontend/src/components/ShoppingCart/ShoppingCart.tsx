@@ -61,7 +61,7 @@ const ShoppingCart = () => {
             cart.items.map((cartItem, index) => (
               <div key={index}>
                 <div
-                  className="truncate"
+                  className="truncate cursor-pointer"
                   onClick={() => removeItem.mutate(cartItem.identifier as any)}
                 >
                   {cartItem.identifier}
