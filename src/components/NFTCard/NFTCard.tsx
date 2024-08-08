@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import {
   Card,
   CardContent,
@@ -10,21 +11,35 @@ import {
 
 import { Button } from "../ui/button";
 
-import { ADD_ITEM_TO_CART, CREATE_CART } from "./utils";
+import { ADD_ITEM_TO_CART, CREATE_CART, isInCart } from "./utils";
 import { useMutation } from "@tanstack/react-query";
-import { API } from "@/app/api/utils";
+
 import request from "graphql-request";
-import { useCreatingCartStore } from "@/store/shoppingCart";
+import { useShoppingCartStore } from "@/store/shoppingCart";
 import { AddItemToCartData, CreateCartData } from "./types";
+import { API } from "@/api/utils";
 
 type NFTCardP = {
   identifier: string;
   contract: string;
   cartId: number | null;
+  image_url: string;
+  height: number;
+  width: number;
   setCartId: (id: number) => void;
 };
 
-const NFTCard = ({ identifier, contract, cartId, setCartId }: NFTCardP) => {
+const NFTCard = ({
+  identifier,
+  contract,
+  cartId,
+  setCartId,
+  height,
+  width,
+  image_url,
+}: NFTCardP) => {
+  const cart = useShoppingCartStore();
+
   const addItem = useMutation<AddItemToCartData, unknown, number>({
     mutationKey: ["cartId", "identifier"],
     mutationFn: async (id: number) =>
@@ -36,7 +51,7 @@ const NFTCard = ({ identifier, contract, cartId, setCartId }: NFTCardP) => {
     onSuccess: (data) => {
       const items = data.addItemToCart.items;
       if (cartId) {
-        useCreatingCartStore.setState({
+        useShoppingCartStore.setState({
           id: cartId,
           items,
         });
@@ -66,6 +81,8 @@ const NFTCard = ({ identifier, contract, cartId, setCartId }: NFTCardP) => {
     addItem.mutate(cartId);
   };
 
+  const disabled = isInCart(contract, identifier, cart);
+
   return (
     <Card>
       <CardHeader>
@@ -73,10 +90,28 @@ const NFTCard = ({ identifier, contract, cartId, setCartId }: NFTCardP) => {
         <CardDescription>Card Description</CardDescription>
       </CardHeader>
       <CardContent>
-        <p>Card Content</p>
+        <div
+          className="flex cursor-pointer rounded-md"
+          style={{
+            position: "relative",
+            height: height,
+            maxWidth: width,
+            width: "100%",
+          }}
+        >
+          <Image
+            src={image_url}
+            sizes={`${width}px`}
+            fill
+            alt={identifier}
+            style={{ objectFit: "cover" }}
+          />
+        </div>
       </CardContent>
       <CardFooter>
-        <Button onClick={() => addToCart()}>Add to cart</Button>
+        <Button onClick={() => addToCart()} disabled={disabled}>
+          Add to cart
+        </Button>
       </CardFooter>
     </Card>
   );

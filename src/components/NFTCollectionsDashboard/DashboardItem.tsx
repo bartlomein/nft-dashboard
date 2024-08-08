@@ -1,12 +1,60 @@
 import React from "react";
-import { Card } from "../ui/card";
+import Image from "next/image";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import Link from "next/link";
 
-const DashboardItem = ({ name, collection }) => {
+type DashboardItemP = {
+  name: string;
+  collection: string;
+  image_url: string;
+  height: number;
+  width: number;
+};
+
+const DashboardItem = ({
+  name,
+  collection,
+  image_url,
+  height,
+  width,
+}: DashboardItemP) => {
   return (
     <div>
-      <Card>{name}</Card>
-      <Link href={`/collection/${collection}`}>{name}</Link>
+      <Card>
+        <Link href={`/collection/${collection}`}>
+          <CardHeader>
+            <CardTitle>{name}</CardTitle>
+            <CardDescription>Card Description</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div
+              className="flex cursor-pointer rounded-md"
+              style={{
+                position: "relative",
+                height: height,
+                maxWidth: width,
+                width: "100%",
+              }}
+            >
+              <Image
+                src={image_url}
+                sizes={`${width}px`}
+                fill
+                alt={name}
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+          </CardContent>
+          <CardFooter>{name}</CardFooter>
+        </Link>
+      </Card>
     </div>
   );
 };

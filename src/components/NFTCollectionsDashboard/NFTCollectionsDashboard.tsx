@@ -38,12 +38,15 @@ const NFTCollectionsDashboard = ({ limit }: NFTDashboardT) => {
   }
 
   return (
-    <div>
+    <div className="grid grid-cols-4 gap-4 p-4">
       {data.collections.map((collection: DashboardItemT, index: number) => (
         <DashboardItem
           key={index}
+          image_url={collection.image_url}
           name={collection.name}
           collection={collection.collection}
+          height={200}
+          width={200}
         />
       ))}
     </div>

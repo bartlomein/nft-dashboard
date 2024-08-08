@@ -1,16 +1,17 @@
 "use client";
-import { useCreatingCartStore } from "@/store/shoppingCart";
+import { useShoppingCartStore } from "@/store/shoppingCart";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 import { GET_CART, REMOVE_ITEM_FROM_CART } from "./utils";
 import request from "graphql-request";
-import { API } from "@/app/api/utils";
+
 import { GetCartData, RemoveFromCartT } from "./types";
 import useLocalStorage from "@/hooks/useLocalStorage";
+import { API } from "@/api/utils";
 const CART_ID = "cart-id";
 const ShoppingCart = () => {
   const [localStorageId] = useLocalStorage<null | number>(CART_ID, null);
-  const cart = useCreatingCartStore();
+  const cart = useShoppingCartStore();
   const cartId = cart?.id;
 
   const { data } = useQuery<GetCartData>({
@@ -23,7 +24,7 @@ const ShoppingCart = () => {
 
   useEffect(() => {
     if (data && localStorageId) {
-      useCreatingCartStore.setState({
+      useShoppingCartStore.setState({
         id: localStorageId,
         items: data.getCart.items,
       });
@@ -37,7 +38,7 @@ const ShoppingCart = () => {
         identifier: identifier,
       }),
     onSuccess: (data) => {
-      useCreatingCartStore.setState({
+      useShoppingCartStore.setState({
         id: data.removeItemFromCart.id,
         items: data.removeItemFromCart.items,
       });

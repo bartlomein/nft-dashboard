@@ -44,6 +44,8 @@ const SingleCollection = ({ slug }: SingleCollectionP) => {
     <div>LOADING</div>;
   }
 
+  console.log("data", data);
+
   return (
     <div className="grid grid-cols-4 gap-4 p-4">
       {data?.nfts.map((nft: NftT, index: number) => (
@@ -53,6 +55,9 @@ const SingleCollection = ({ slug }: SingleCollectionP) => {
           contract={nft.contract}
           cartId={cartId}
           setCartId={setCartId}
+          image_url={nft.display_image_url}
+          height={200}
+          width={200}
         />
       ))}
     </div>

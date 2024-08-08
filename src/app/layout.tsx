@@ -21,7 +21,7 @@ export default function RootLayout({
             <div className="relative">
               <ShoppingCart />
             </div>
-            {children}
+            <div className="flex min-h-screen flex-col  p-24">{children}</div>
           </>
         </body>
       </Providers>

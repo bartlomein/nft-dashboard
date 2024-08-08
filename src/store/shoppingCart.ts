@@ -5,9 +5,9 @@ type CartItem = {
   identifier: string;
 };
 
-type ShoppingCartT = {
+export type ShoppingCartT = {
   id: number;
   items: CartItem[];
 };
 
-export const useCreatingCartStore = create<ShoppingCartT | null>(() => null);
+export const useShoppingCartStore = create<ShoppingCartT | null>(() => null);
