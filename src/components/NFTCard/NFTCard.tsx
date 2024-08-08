@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useMemo } from "react";
 import Image from "next/image";
 import {
   Card,
@@ -68,7 +68,7 @@ const NFTCard = ({
     },
   });
 
-  const addToCart = async () => {
+  const addToCart = useCallback(async () => {
     if (!cartId) {
       const data = await createCart.mutateAsync();
       const id = data.createCart.id;
@@ -79,9 +79,12 @@ const NFTCard = ({
     }
 
     addItem.mutate(cartId);
-  };
+  }, [cartId]);
 
-  const disabled = isInCart(contract, identifier, cart);
+  const disabled = useMemo(
+    () => isInCart(contract, identifier, cart),
+    [contract, identifier, cart]
+  );
 
   return (
     <Card>

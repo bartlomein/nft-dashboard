@@ -23,7 +23,7 @@ export const CREATE_CART = `
 export const isInCart = (
   contract: string,
   identifier: string,
-  cart: ShoppingCartT
+  cart: ShoppingCartT | null
 ) => {
   if (cart && cart.items && cart.items.length) {
     const isInCart = cart.items.find(
