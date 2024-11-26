@@ -1,4 +1,4 @@
-# Kinetic NFT Dashboard
+#  NFT Dashboard
 
 This is a full stack application for showing NFTs from the OpenSea plaform and being able to add and remove them using a shopping cart.
 
